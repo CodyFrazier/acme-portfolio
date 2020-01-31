@@ -26,12 +26,40 @@ input:focus{
 	color: #ea7200;
 	border: 1px solid #ea7200;
 	border-radius: 15px;
+	margin-top: 1rem;
 	padding: .25rem;
+}
+.stats{
+	display: flex;
+	flex-flow: nowrap column;
+	align-items: center;
+	justify-content: space-around;
+}
+.statBlock{
+	width: 120px;
+	height: 120px;
+	padding: 3rem;
+	background-color: #266;
+	margin: 1rem;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
 }
 
 @media screen and (min-width: 768px){
 	.userBox{
 		flex-flow: nowrap row;
 		font-size: 18px;
+	}
+	.userBox > input{
+		margin-top: 0;
+	}
+	.stats{
+		margin-top: 5rem;
+		flex-flow: nowrap row;
+		justify-content: space-around;
+		align-items: center;
 	}
 }
