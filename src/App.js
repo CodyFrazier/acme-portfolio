@@ -42,7 +42,12 @@ function App() {
 	console.log(user);
 	return (
 		<div className="App">
-			<input type = 'button' value = 'Remove User' onClick = { () => { removeUser(); getNewUser() }}/>
+			<div className = 'userBox'>
+				<img id = 'avatar' alt = '' src = { user.avatar }/>
+				<div>{ `Welcome ${ user.email }` }</div>
+				<input type = 'button' value = 'Change User' onClick = { () => { removeUser(); getNewUser() }}/>
+				
+			</div>
 		</div>
 	);
 }
