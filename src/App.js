@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 
@@ -6,10 +6,10 @@ const API = 'https://acme-users-api-rev.herokuapp.com/api';
 
 const fetchUser = async () => {
 	const storage = window.localStorage;
-	const userID = storage.getItem('userId');
-	if(userID){
+	const userId = storage.getItem('userId');
+	if(userId){
 		try{
-			return (await axios.get(`${ API }/users/detail${ userID }`)).data;
+			return (await axios.get(`${ API }/users/detail${ userId }`)).data;
 		}catch(ex){
 			storage.removeItem('userId');
 			return fetchUser();
@@ -22,10 +22,29 @@ const fetchUser = async () => {
 
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+	
+	const [user, setUser] = useState({});
+	
+	const getNewUser = async () => {
+		const user = await fetchUser();
+		setUser(user);
+	};
+	
+	const removeUser = () => {
+		window.localStorage.removeItem('userId');
+		
+	};
+	
+	useEffect(() => {
+		getNewUser();
+	}, []);
+	
+	console.log(user);
+	return (
+		<div className="App">
+			<input type = 'button' value = 'Remove User' onClick = { () => { removeUser(); getNewUser() }}/>
+		</div>
+	);
 }
 
 export default App;
