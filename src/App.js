@@ -4,6 +4,10 @@ import axios from 'axios';
 import Notes from './Notes.js';
 import Vacations from './Vacations.js';
 import FollowedCompanies from './FollowedCompanies.js';
+import NotesPage from './NotesPage.js';
+import VacationsPage from './VacationsPage.js';
+import FollowedCompaniesPage from './FollowedCompaniesPage.js';
+import qs from 'qs';
 
 const API = 'https://acme-users-api-rev.herokuapp.com/api';
 
@@ -23,14 +27,17 @@ const fetchUser = async () => {
 	return user;
 };
 
-
 function App() {
+	
+	const getHash = () => {
+		return window.location.hash.slice(1);
+	};
 	
 	const [user, setUser] = useState({});
 	const [notes, setNotes] = useState([]);
 	const [vacations, setVacations] = useState([]);
 	const [followComps, setFollowComps] = useState([]);
-	
+	const [params, setParams] = useState(qs.parse(getHash()));
 	
 	const getNewUser = async () => {
 		const user = await fetchUser();
@@ -57,18 +64,27 @@ function App() {
 		}
 	}, [user.id]);
 	
+	useEffect(() => {
+		window.addEventListener('hashchange', () => {
+			setParams(qs.parse(getHash()));
+		});
+	}, []);
+	
 	return (
 		<div className="App">
 			<div className = 'userBox'>
-				<img id = 'avatar' alt = '' src = { user.avatar }/>
+				<a href = ''><img id = 'avatar' alt = '' src = { user.avatar }/></a>
 				<div>{ `Welcome ${ user.email }` }</div>
 				<input type = 'button' value = 'Change User' onClick = { () => { removeUser(); getNewUser() }}/>
 				
 			</div>
 			<div className = 'stats'>
-				<Notes notes = { notes }/>
-				<Vacations vacations = { vacations }/>
-				<FollowedCompanies followComps = { followComps }/>
+				{!params.view && <Notes notes = { notes }/>}
+				{!params.view && <Vacations vacations = { vacations }/>}
+				{!params.view && <FollowedCompanies followComps = { followComps }/>}
+				{params.view === 'notes' && <NotesPage notes = { notes }/>}
+				{params.view === 'vacations' && <VacationsPage vacations = { vacations }/>}
+				{params.view === 'followed_companies' && <FollowedCompaniesPage followComps = { followComps }/>}
 			</div>
 		</div>
 	);

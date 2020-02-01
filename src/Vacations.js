@@ -1,8 +1,11 @@
 import React from 'react';
 
-function Vacations(notes){
+function Vacations(obj){
 	return (
-		<div className = 'statBlock'>You Have { notes.length || 0 } Vacations</div>
+		<div className = 'statBlock' >
+			<a href = '#view=vacations'><h3 onClick = { () => { console.log("Change Hash and Print Vacations") } }>Vacations</h3></a>
+			<div>You Have { obj.vacations.length } Vacations</div>
+		</div>
 	)
 }
 
