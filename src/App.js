@@ -73,7 +73,7 @@ function App() {
 	return (
 		<div className="App">
 			<div className = 'userBox'>
-				<a href = ''><img id = 'avatar' alt = '' src = { user.avatar }/></a>
+				<a href = '/#'><img id = 'avatar' alt = '' src = { user.avatar }/></a>
 				<div>{ `Welcome ${ user.email }` }</div>
 				<input type = 'button' value = 'Change User' onClick = { () => { removeUser(); getNewUser() }}/>
 				
@@ -83,7 +83,7 @@ function App() {
 				{!params.view && <Vacations vacations = { vacations }/>}
 				{!params.view && <FollowedCompanies followComps = { followComps }/>}
 				{params.view === 'notes' && <NotesPage notes = { notes }/>}
-				{params.view === 'vacations' && <VacationsPage vacations = { vacations }/>}
+				{params.view === 'vacations' && <VacationsPage vacations = { vacations } setVacations = { setVacations }/>}
 				{params.view === 'followed_companies' && <FollowedCompaniesPage followComps = { followComps }/>}
 			</div>
 		</div>

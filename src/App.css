@@ -55,6 +55,36 @@ h3{
 a:link{
 	color: #ea7200;
 }
+.unlist{
+	list-style-type: none;
+	padding: 0;
+}
+.boxList{
+	border: 1px solid;
+	background-color: #266;
+	border-radius: 5px;
+	padding: 1rem;
+}
+form div{
+	display: flex;
+	flex-flow: nowrap row;
+	justify-content: space-between;
+	align-items: center;
+}
+form input{
+	background-color: #222;
+	border: 1px solid #ea7200;
+	color: #ea7200;
+	margin-top: .5rem;
+	text-align: center;
+}
+#submit{
+	padding: .25rem;
+	width: 100%;
+}
+hr{
+	border-color: #ea7200;
+}
 
 @media screen and (min-width: 768px){
 	.userBox{
